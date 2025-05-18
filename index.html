@@ -1,0 +1,112 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erik Icons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1 1 300px;
+            max-width: 20%; /* 5 columns */
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            flex: 1;
+        }
+
+        .row img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 768px) {
+            .column {
+                max-width: 50%;
+            }
+            .row img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .column {
+                max-width: 100%;
+            }
+            .row img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Loop through icons from 1.png to 115.png -->
+        <script>
+            for (let i = 1; i <= 3; i++) {
+                document.write(`
+                    <div class="column">
+                        <div class="row">
+                            <img src="./icons/${i}.png" alt="Icon ${i}" data-url="https://erik4481.github.io/Icons-app/icons/${i}.png">
+                            <button class="copy-btn" onclick="copyToClipboard(this)">Copy Link</button>
+                        </div>
+                    </div>
+                `);
+            }
+        </script>
+    </div>
+    <script>
+        function copyToClipboard(button) {
+            const url = button.previousElementSibling.getAttribute('data-url');
+            
+            const tempInput = document.createElement('textarea');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = 'Copy Link';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
